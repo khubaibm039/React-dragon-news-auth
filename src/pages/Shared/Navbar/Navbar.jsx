@@ -63,7 +63,7 @@ const Navbar = () => {
                         />
                     </div>
                 </div>
-                <Link className="btn">Button</Link>
+                <Link className="btn">Login</Link>
             </div>
         </div>
     );
