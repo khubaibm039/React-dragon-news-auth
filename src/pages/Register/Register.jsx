@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -19,6 +19,7 @@ const Register = () => {
         createUser(email, password)
             .then((result) => {
                 console.log(result.user);
+                <Navigate to={"/"}></Navigate>;
             })
             .catch((error) => {
                 console.log(error.message);
