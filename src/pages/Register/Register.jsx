@@ -1,12 +1,28 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget);
+        // console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
-        console.log(form.get("email"));
+        const name = form.get("name");
+        const image = form.get("image");
+        const email = form.get("email");
+        const password = form.get("password");
+        // console.log(name, image, email, password);
+
+        createUser(email, password)
+            .then((result) => {
+                console.log(result.user);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     };
 
     return (
@@ -20,8 +36,8 @@ const Register = () => {
                         </h1>
                         <div className="border border-gray-600 my-10"></div>
                     </div>
-                    <div className=" shrink-0  ">
-                        <form onSubmit={handleLogin} className="">
+                    <div className="shrink-0">
+                        <form onSubmit={handleLogin}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className=" text-2xl font-bold">
@@ -44,7 +60,7 @@ const Register = () => {
                                 </label>
                                 <input
                                     name="image"
-                                    type="url"
+                                    type="text"
                                     placeholder="Enter your Photo URL"
                                     className="input input-bordered"
                                     required
