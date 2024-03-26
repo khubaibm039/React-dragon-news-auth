@@ -1,25 +1,23 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
+    const navigate = useNavigate();
     const { createUser } = useContext(AuthContext);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
-        const name = form.get("name");
-        const image = form.get("image");
+        // const name = form.get("name");
+        // const image = form.get("image");
         const email = form.get("email");
         const password = form.get("password");
-        // console.log(name, image, email, password);
-
         createUser(email, password)
             .then((result) => {
                 console.log(result.user);
-                <Navigate to={"/"}></Navigate>;
+                navigate("/");
             })
             .catch((error) => {
                 console.log(error.message);
@@ -29,7 +27,7 @@ const Register = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="hero min-h-[80vh] w-3/4 mx-auto ">
+            <div className="hero min-h-[80vh] w-3/4 mx-auto">
                 <div className=" grid w-full bg-base-300 p-40">
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl text-center font-bold">
